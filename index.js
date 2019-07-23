@@ -18,6 +18,7 @@ const HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
 
 const config = {
   apikey: null,
+  lang: null
 };
 
 class Apixu {
@@ -35,6 +36,9 @@ class Apixu {
       key: this.config.apikey,
       q: query,
     };
+    if (this.config.lang) {
+      params.lang = this.config.lang;
+    }
     const url = getUrl('current', params);
     return request(url);
   }
@@ -47,6 +51,9 @@ class Apixu {
     };
     if (hour !== undefined) {
       params['hour'] = hour;
+    }
+    if (this.config.lang) {
+      params.lang = this.config.lang;
     }
 
     const url = getUrl('forecast', params);
@@ -75,6 +82,9 @@ class Apixu {
           (since.getMonth() + 1) + '-'
           + since.getDate(),
     };
+    if (this.config.lang) {
+      params.lang = this.config.lang;
+    }
     if (until instanceof Date) {
       params['end_dt'] = until.getFullYear() + '-' +
         (until.getMonth() + 1) + '-'
@@ -90,6 +100,9 @@ class Apixu {
       key: this.config.apikey,
       q: query,
     };
+    if (this.config.lang) {
+      params.lang = this.config.lang;
+    }
     const url = getUrl('search', params);
     return request(url);
   }
